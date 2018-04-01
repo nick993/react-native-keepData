@@ -10,10 +10,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {Container} from 'native-base';
-
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -35,40 +36,41 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          This is a Demo app {this.state.word}
-        </Text>
-        <Button title='Click me' onPress = {this.getApiForNow}/>  
+        <View style = {styles.navBar} >
+          <Image source = {require('./app/images/toDoIcon.png')} 
+          style = {{width:40, height: 40}}/>
+        </View>
+        <View style = {styles.body} />
+        <View style = {styles.tabBar}>
+          <TouchableOpacity style = {styles.tabItem}>
+          
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
- 
-  getApiForNow = () => {
-   return fetch('https://soa-starter-1.appspot.com/api/greeting/2')    
-    .then((response) => {
-      this.setState({word: response._bodyText}) 
-    })
-    .catch(error => {
-      console.error(error)
-    });
-  }
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  navBar: {
+    height: 55,
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    elevation: 3,
+    flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'space-between'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  tabBar: {
+    backgroundColor: 'white',
+    height: 60,
+    borderTopWidth: 0.5,
+    borderColor: '#E5E5E5'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  body: {
+    flex: 1
+  }
 });
